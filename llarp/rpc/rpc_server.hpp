@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string_view>
-#include <oxenmq/oxenmq.h>
-#include <oxenmq/address.h>
-#include <oxen/log/omq_logger.hpp>
+#include <sispopmq/sispopmq.h>
+#include <sispopmq/address.h>
+#include <sispop/log/omq_logger.hpp>
 
 namespace llarp
 {
@@ -12,22 +12,22 @@ namespace llarp
 
 namespace llarp::rpc
 {
-  using LMQ_ptr = std::shared_ptr<oxenmq::OxenMQ>;
+  using LMQ_ptr = std::shared_ptr<sispopmq::SispopMQ>;
 
   struct RpcServer
   {
     explicit RpcServer(LMQ_ptr, AbstractRouter*);
     ~RpcServer() = default;
     void
-    AsyncServeRPC(oxenmq::address addr);
+    AsyncServeRPC(sispopmq::address addr);
 
    private:
     void
-    HandleLogsSubRequest(oxenmq::Message& m);
+    HandleLogsSubRequest(sispopmq::Message& m);
 
     LMQ_ptr m_LMQ;
     AbstractRouter* const m_Router;
 
-    oxen::log::PubsubLogger log_subs;
+    sispop::log::PubsubLogger log_subs;
   };
 }  // namespace llarp::rpc

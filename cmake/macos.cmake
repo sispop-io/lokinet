@@ -172,7 +172,7 @@ function(macos_target_setup)
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${lokinet_VERSION_MAJOR}.${lokinet_VERSION_MINOR}"
     MACOSX_BUNDLE_GUI_IDENTIFIER "org.lokinet"
     MACOSX_BUNDLE_INFO_PLIST "${PROJECT_SOURCE_DIR}/contrib/macos/lokinet.Info.plist.in"
-    MACOSX_BUNDLE_COPYRIGHT "© 2022, The Oxen Project"
+    MACOSX_BUNDLE_COPYRIGHT "© 2022, The Sispop Project"
   )
 
   add_custom_target(copy_bootstrap

@@ -18,10 +18,10 @@
 #define MAX_RC_SIZE (1024)
 #define NICKLEN (32)
 
-namespace oxenc
+namespace sispopc
 {
   class bt_list_consumer;
-}  // namespace oxenc
+}  // namespace sispopc
 
 namespace llarp
 {
@@ -213,7 +213,7 @@ namespace llarp
     DecodeVersion_0(llarp_buffer_t* buf);
 
     bool
-    DecodeVersion_1(oxenc::bt_list_consumer& btlist);
+    DecodeVersion_1(sispopc::bt_list_consumer& btlist);
   };
 
   template <>

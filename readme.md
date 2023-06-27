@@ -8,7 +8,7 @@ Lokinet is the reference implementation of LLARP (low latency anonymous routing 
 
 #### You can learn more about the high level, how to use it and the internals of the protocol [here](docs/readme.md)
 
-[![Build Status](https://ci.oxen.rocks/api/badges/oxen-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.oxen.rocks/oxen-io/lokinet)
+[![Build Status](https://ci.sispop.rocks/api/badges/sispop-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.sispop.rocks/sispop-io/lokinet)
 
 # License
 
@@ -18,7 +18,7 @@ the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 ```
-Copyright © 2018-2022 The Oxen Project
+Copyright © 2018-2022 The Sispop Project
 Copyright © 2018-2022 Jeff Becker
 Copyright © 2018-2020 Rick V. (Historical Windows NT port and portions)
 ```

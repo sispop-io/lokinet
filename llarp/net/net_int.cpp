@@ -3,7 +3,7 @@
 #include <string>
 #include <variant>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 namespace llarp
 {
@@ -12,13 +12,13 @@ namespace llarp
     huint16_t
     ToHost(port_t x)
     {
-      return huint16_t{oxenc::big_to_host(x.n)};
+      return huint16_t{sispopc::big_to_host(x.n)};
     }
 
     huint32_t
     ToHost(ipv4addr_t x)
     {
-      return huint32_t{oxenc::big_to_host(x.n)};
+      return huint32_t{sispopc::big_to_host(x.n)};
     }
 
     huint128_t
@@ -30,13 +30,13 @@ namespace llarp
     port_t
     ToNet(huint16_t x)
     {
-      return port_t{oxenc::host_to_big(x.h)};
+      return port_t{sispopc::host_to_big(x.h)};
     }
 
     ipv4addr_t
     ToNet(huint32_t x)
     {
-      return ipv4addr_t{oxenc::host_to_big(x.h)};
+      return ipv4addr_t{sispopc::host_to_big(x.h)};
     }
 
     ipv6addr_t
@@ -52,7 +52,7 @@ namespace llarp
   {
     c.resize(16);
     std::fill(c.begin(), c.end(), 0);
-    oxenc::write_host_as_big(h, c.data() + 12);
+    sispopc::write_host_as_big(h, c.data() + 12);
     c[11] = 0xff;
     c[10] = 0xff;
   }

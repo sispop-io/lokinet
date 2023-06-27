@@ -2,7 +2,7 @@
 
 #include <llarp/net/ip_range.hpp>
 #include <llarp/net/ip_packet.hpp>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 #include "i_packet_io.hpp"
 

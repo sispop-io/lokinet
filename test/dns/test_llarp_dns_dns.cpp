@@ -100,8 +100,8 @@ TEST_CASE("Test PTR records", "[dns]")
   expected.h.lower = 0xeeee888812341234UL;
   ip = llarp::dns::DecodePTR("4.3.2.1.4.3.2.1.8.8.8.8.e.e.e.e.f.e.d.c.b.a.9.8.7.6.5.4.3.2.1.0.ip6.arpa.");
   CHECK(ip);
-  CHECK(oxenc::to_hex(std::string_view{reinterpret_cast<char*>(&expected.h), 16}) ==
-          oxenc::to_hex(std::string_view{reinterpret_cast<char*>(&ip->h), 16}));
+  CHECK(sispopc::to_hex(std::string_view{reinterpret_cast<char*>(&expected.h), 16}) ==
+          sispopc::to_hex(std::string_view{reinterpret_cast<char*>(&ip->h), 16}));
   CHECK(*ip == expected);
 }
 

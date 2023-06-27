@@ -14,7 +14,7 @@
 #include <optional>
 #include <unordered_set>
 #include <set>
-#include "oxenc/variant.h"
+#include "sispopc/variant.h"
 
 namespace llarp
 {

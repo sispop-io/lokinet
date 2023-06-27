@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <llarp/net/net.hpp>
 #include <llarp/ev/libuv.hpp>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 namespace mocks
 {

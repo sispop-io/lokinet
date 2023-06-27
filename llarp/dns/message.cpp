@@ -1,5 +1,5 @@
 #include "message.hpp"
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 #include "dns.hpp"
 #include "srv_data.hpp"
@@ -199,7 +199,7 @@ namespace llarp
           const auto addr = net::TruncateV6(ip);
           rec.rr_type = qTypeA;
           rec.rData.resize(4);
-          oxenc::write_host_as_big(addr.h, rec.rData.data());
+          sispopc::write_host_as_big(addr.h, rec.rData.data());
         }
         answers.emplace_back(std::move(rec));
       }

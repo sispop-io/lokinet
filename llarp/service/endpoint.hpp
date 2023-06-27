@@ -19,7 +19,7 @@
 #include <optional>
 #include <unordered_map>
 #include <variant>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 #include "endpoint_types.hpp"
 #include "llarp/endpoint_base.hpp"
 

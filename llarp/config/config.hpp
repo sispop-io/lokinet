@@ -27,7 +27,7 @@
 #include <vector>
 #include <unordered_set>
 
-#include <oxenmq/address.h>
+#include <sispopmq/address.h>
 
 namespace llarp
 {
@@ -199,7 +199,7 @@ namespace llarp
   {
     bool whitelistRouters = false;
     fs::path ident_keyfile;
-    oxenmq::address lokidRPCAddr;
+    sispopmq::address lokidRPCAddr;
 
     void
     defineConfigOptions(ConfigDefinition& conf, const ConfigGenParameters& params);

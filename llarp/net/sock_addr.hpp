@@ -12,7 +12,7 @@
 #include <string_view>
 #include <string>
 #include "net_int.hpp"
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 #include <llarp/util/formattable.hpp>
 
 namespace llarp

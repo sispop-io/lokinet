@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 #endif
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 #include <algorithm>
 #include <map>
@@ -587,11 +587,11 @@ namespace llarp::net
       // code 'Destination host unknown error'
       *itr++ = 7;
       // checksum + unused
-      oxenc::write_host_as_big<uint32_t>(0, itr);
+      sispopc::write_host_as_big<uint32_t>(0, itr);
       checksum = (uint16_t*)itr;
       itr += 4;
       // next hop mtu is ignored but let's put something here anyways just in case tm
-      oxenc::write_host_as_big<uint16_t>(1500, itr);
+      sispopc::write_host_as_big<uint16_t>(1500, itr);
       itr += 2;
       // copy ip header and first 8 bytes of datagram for icmp rject
       std::copy_n(data(), ip_Header_size + icmp_Header_size, itr);
@@ -657,10 +657,10 @@ namespace llarp::net
       ptr += 2;
       std::memcpy(ptr, &dstport.n, 2);
       ptr += 2;
-      oxenc::write_host_as_big(
+      sispopc::write_host_as_big(
           static_cast<uint16_t>(udp_data.size() + constants::udp_header_bytes), ptr);
       ptr += 2;
-      oxenc::write_host_as_big(uint16_t{0}, ptr);  // checksum
+      sispopc::write_host_as_big(uint16_t{0}, ptr);  // checksum
       ptr += 2;
       std::copy_n(udp_data.data(), udp_data.size(), ptr);
 

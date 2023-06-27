@@ -24,8 +24,8 @@ target_link_libraries(lokinet-util PUBLIC
   lokinet-cryptography
   nlohmann_json::nlohmann_json
   filesystem
-  oxenc::oxenc
-  oxen::logging
+  sispopc::sispopc
+  sispop::logging
 )
 
 add_library(lokinet-platform
@@ -46,7 +46,7 @@ add_library(lokinet-platform
 )
 
 target_link_libraries(lokinet-platform PUBLIC lokinet-cryptography lokinet-util Threads::Threads base_libs uvw)
-target_link_libraries(lokinet-platform PRIVATE oxenmq::oxenmq)
+target_link_libraries(lokinet-platform PRIVATE sispopmq::sispopmq)
 
 if (ANDROID)
   target_sources(lokinet-platform PRIVATE android/ifaddrs.c util/nop_service_manager.cpp)
@@ -83,7 +83,7 @@ if (WIN32)
   target_include_directories(lokinet-windivert PUBLIC ${PROJECT_SOURCE_DIR})
   target_link_libraries(lokinet-wintun PUBLIC lokinet-platform lokinet-util lokinet-config)
   target_link_libraries(lokinet-win32 PUBLIC lokinet-util)
-  target_link_libraries(lokinet-windivert PUBLIC oxen-logging)
+  target_link_libraries(lokinet-windivert PUBLIC sispop-logging)
   target_link_libraries(lokinet-windivert PRIVATE lokinet-win32)
   target_link_libraries(lokinet-platform PRIVATE lokinet-win32 lokinet-wintun lokinet-windivert)
 else()
@@ -121,7 +121,7 @@ add_library(lokinet-config
   config/ini.cpp
   config/key_manager.cpp)
 
-target_link_libraries(lokinet-config PUBLIC lokinet-dns lokinet-platform oxenmq::oxenmq)
+target_link_libraries(lokinet-config PUBLIC lokinet-dns lokinet-platform sispopmq::sispopmq)
 
 add_library(lokinet-amalgum
   STATIC
@@ -279,14 +279,14 @@ target_link_libraries(lokinet-amalgum PRIVATE libunbound)
 
 target_link_libraries(lokinet-amalgum PUBLIC
     cxxopts
-    oxenc::oxenc
+    sispopc::sispopc
     lokinet-platform
     lokinet-config
     lokinet-dns
     lokinet-util
     lokinet-cryptography
     ngtcp2_static
-    oxenmq::oxenmq)
+    sispopmq::sispopmq)
 
 enable_lto(lokinet-util lokinet-platform lokinet-dns lokinet-config lokinet-amalgum)
 

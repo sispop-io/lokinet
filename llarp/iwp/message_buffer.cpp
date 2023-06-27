@@ -29,9 +29,9 @@ namespace llarp
     {
       size_t extra = std::min(m_Data.size(), FragmentSize);
       auto xmit = CreatePacket(Command::eXMIT, 10 + 32 + extra, 0, 0);
-      oxenc::write_host_as_big(
+      sispopc::write_host_as_big(
           static_cast<uint16_t>(m_Data.size()), xmit.data() + CommandOverhead + PacketOverhead);
-      oxenc::write_host_as_big(m_MsgID, xmit.data() + 2 + CommandOverhead + PacketOverhead);
+      sispopc::write_host_as_big(m_MsgID, xmit.data() + 2 + CommandOverhead + PacketOverhead);
       std::copy_n(
           m_Digest.begin(), m_Digest.size(), xmit.data() + 10 + CommandOverhead + PacketOverhead);
       std::copy_n(m_Data.data(), extra, xmit.data() + 10 + CommandOverhead + PacketOverhead + 32);
@@ -74,8 +74,8 @@ namespace llarp
         {
           const size_t fragsz = idx + FragmentSize < datasz ? FragmentSize : datasz - idx;
           auto frag = CreatePacket(Command::eDATA, fragsz + Overhead, 0, 0);
-          oxenc::write_host_as_big(idx, frag.data() + 2 + PacketOverhead);
-          oxenc::write_host_as_big(m_MsgID, frag.data() + 4 + PacketOverhead);
+          sispopc::write_host_as_big(idx, frag.data() + 2 + PacketOverhead);
+          sispopc::write_host_as_big(m_MsgID, frag.data() + 4 + PacketOverhead);
           std::copy(
               m_Data.begin() + idx,
               m_Data.begin() + idx + fragsz,
@@ -139,7 +139,7 @@ namespace llarp
     InboundMessage::ACKS() const
     {
       auto acks = CreatePacket(Command::eACKS, 9);
-      oxenc::write_host_as_big(m_MsgID, acks.data() + CommandOverhead + PacketOverhead);
+      sispopc::write_host_as_big(m_MsgID, acks.data() + CommandOverhead + PacketOverhead);
       acks[PacketOverhead + 10] = AcksBitmask();
       return acks;
     }

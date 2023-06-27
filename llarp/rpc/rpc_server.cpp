@@ -12,7 +12,7 @@
 #include <llarp/service/name.hpp>
 #include <llarp/router/abstractrouter.hpp>
 #include <llarp/dns/dns.hpp>
-#include <oxenmq/fmt.h>
+#include <sispopmq/fmt.h>
 
 namespace
 {
@@ -27,7 +27,7 @@ namespace llarp::rpc
 
   /// maybe parse json from message paramter at index
   std::optional<nlohmann::json>
-  MaybeParseJSON(const oxenmq::Message& msg, size_t index = 0)
+  MaybeParseJSON(const sispopmq::Message& msg, size_t index = 0)
   {
     try
     {
@@ -116,7 +116,7 @@ namespace llarp::rpc
 
   void
   HandleJSONRequest(
-      oxenmq::Message& msg, std::function<void(nlohmann::json, ReplyFunction_t)> handleRequest)
+      sispopmq::Message& msg, std::function<void(nlohmann::json, ReplyFunction_t)> handleRequest)
   {
     const auto maybe = MaybeParseJSON(msg);
     if (not maybe.has_value())
@@ -141,14 +141,14 @@ namespace llarp::rpc
   }
 
   void
-  RpcServer::AsyncServeRPC(oxenmq::address url)
+  RpcServer::AsyncServeRPC(sispopmq::address url)
   {
     m_LMQ->listen_plain(url.zmq_address());
-    m_LMQ->add_category("llarp", oxenmq::AuthLevel::none)
-        .add_request_command("logs", [this](oxenmq::Message& msg) { HandleLogsSubRequest(msg); })
+    m_LMQ->add_category("llarp", sispopmq::AuthLevel::none)
+        .add_request_command("logs", [this](sispopmq::Message& msg) { HandleLogsSubRequest(msg); })
         .add_request_command(
             "halt",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               if (not m_Router->IsRunning())
               {
                 msg.send_reply(CreateJSONError("router is not running"));
@@ -159,14 +159,14 @@ namespace llarp::rpc
             })
         .add_request_command(
             "version",
-            [r = m_Router](oxenmq::Message& msg) {
+            [r = m_Router](sispopmq::Message& msg) {
               util::StatusObject result{
                   {"version", llarp::VERSION_FULL}, {"uptime", to_json(r->Uptime())}};
               msg.send_reply(CreateJSONResponse(result));
             })
         .add_request_command(
             "status",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               m_Router->loop()->call([defer = msg.send_later(), r = m_Router]() {
                 std::string data;
                 if (r->IsRunning())
@@ -182,14 +182,14 @@ namespace llarp::rpc
             })
         .add_request_command(
             "get_status",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               m_Router->loop()->call([defer = msg.send_later(), r = m_Router]() {
                 defer.reply(CreateJSONResponse(r->ExtractSummaryStatus()));
               });
             })
         .add_request_command(
             "quic_connect",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 std::string endpoint = "default";
                 if (auto itr = obj.find("endpoint"); itr != obj.end())
@@ -262,7 +262,7 @@ namespace llarp::rpc
             })
         .add_request_command(
             "quic_listener",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 std::string endpoint = "default";
                 if (auto itr = obj.find("endpoint"); itr != obj.end())
@@ -339,7 +339,7 @@ namespace llarp::rpc
             })
         .add_request_command(
             "lookup_snode",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 if (not r->IsServiceNode())
                 {
@@ -384,7 +384,7 @@ namespace llarp::rpc
             })
         .add_request_command(
             "endpoint",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 if (r->IsServiceNode())
                 {
@@ -440,7 +440,7 @@ namespace llarp::rpc
             })
         .add_request_command(
             "exit",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 if (r->IsServiceNode())
                 {
@@ -630,7 +630,7 @@ namespace llarp::rpc
             })
         .add_request_command(
             "dns_query",
-            [&](oxenmq::Message& msg) {
+            [&](sispopmq::Message& msg) {
               HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
                 std::string endpoint{"default"};
                 if (const auto itr = obj.find("endpoint"); itr != obj.end())
@@ -673,7 +673,7 @@ namespace llarp::rpc
                 reply(CreateJSONError("no such endpoint for dns query"));
               });
             })
-        .add_request_command("config", [&](oxenmq::Message& msg) {
+        .add_request_command("config", [&](sispopmq::Message& msg) {
           HandleJSONRequest(msg, [r = m_Router](nlohmann::json obj, ReplyFunction_t reply) {
             {
               const auto itr = obj.find("override");
@@ -718,7 +718,7 @@ namespace llarp::rpc
   }
 
   void
-  RpcServer::HandleLogsSubRequest(oxenmq::Message& m)
+  RpcServer::HandleLogsSubRequest(sispopmq::Message& m)
   {
     if (m.data.size() != 1)
     {

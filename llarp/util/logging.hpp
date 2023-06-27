@@ -6,13 +6,13 @@
 #include <string_view>
 #include <array>
 
-#include <oxen/log.hpp>
-#include <oxen/log/ring_buffer_sink.hpp>
-#include "oxen/log/internal.hpp"
+#include <sispop/log.hpp>
+#include <sispop/log/ring_buffer_sink.hpp>
+#include "sispop/log/internal.hpp"
 
 namespace llarp
 {
-  namespace log = oxen::log;
+  namespace log = sispop::log;
 }
 
 // Not ready to pollute these deprecation warnings everywhere yet

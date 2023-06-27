@@ -16,7 +16,7 @@
 #include <llarp/util/str.hpp>
 #include <exception>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 #include <llarp/router/abstractrouter.hpp>
 #include <llarp.hpp>
@@ -410,10 +410,10 @@ namespace llarp::vpn
         if (parts[1].find_first_not_of('0') == std::string::npos and parts[0] != ifname)
         {
           const auto& ip = parts[2];
-          if ((ip.size() == sizeof(uint32_t) * 2) and oxenc::is_hex(ip))
+          if ((ip.size() == sizeof(uint32_t) * 2) and sispopc::is_hex(ip))
           {
             huint32_t x{};
-            oxenc::from_hex(ip.begin(), ip.end(), reinterpret_cast<char*>(&x.h));
+            sispopc::from_hex(ip.begin(), ip.end(), reinterpret_cast<char*>(&x.h));
             gateways.emplace_back(net::ipv4addr_t::from_host(x.h));
           }
         }

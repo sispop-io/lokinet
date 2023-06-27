@@ -227,7 +227,7 @@ namespace llarp
         const auto& itr = m_SendMACKs.top();
         while (numAcks > 0)
         {
-          oxenc::write_host_as_big(itr, ptr);
+          sispopc::write_host_as_big(itr, ptr);
           m_SendMACKs.pop();
           numAcks--;
           ptr += sizeof(uint64_t);
@@ -730,7 +730,7 @@ namespace llarp
       byte_t* ptr = data.data() + CommandOverhead + PacketOverhead + 1;
       while (numAcks > 0)
       {
-        auto acked = oxenc::load_big_to_host<uint64_t>(ptr);
+        auto acked = sispopc::load_big_to_host<uint64_t>(ptr);
         LogTrace("mack containing txid=", acked, " from ", m_RemoteAddr);
         auto itr = m_TXMsgs.find(acked);
         if (itr != m_TXMsgs.end())
@@ -757,7 +757,7 @@ namespace llarp
         LogError("short nack from ", m_RemoteAddr);
         return;
       }
-      auto txid = oxenc::load_big_to_host<uint64_t>(data.data() + CommandOverhead + PacketOverhead);
+      auto txid = sispopc::load_big_to_host<uint64_t>(data.data() + CommandOverhead + PacketOverhead);
       LogTrace("got nack on ", txid, " from ", m_RemoteAddr);
       auto itr = m_TXMsgs.find(txid);
       if (itr != m_TXMsgs.end())
@@ -779,13 +779,13 @@ namespace llarp
         return;
       }
       auto* pos = data.data() + CommandOverhead + PacketOverhead;
-      auto sz = oxenc::load_big_to_host<uint16_t>(pos);
+      auto sz = sispopc::load_big_to_host<uint16_t>(pos);
       pos += sizeof(sz);
-      auto rxid = oxenc::load_big_to_host<uint64_t>(pos);
+      auto rxid = sispopc::load_big_to_host<uint64_t>(pos);
       pos += sizeof(rxid);
       auto p2 = pos + ShortHash::SIZE;
       assert(p2 == data.data() + XMITOverhead);
-      LogTrace("rxid=", rxid, " sz=", sz, " h=", oxenc::to_hex(pos, p2), " from ", m_RemoteAddr);
+      LogTrace("rxid=", rxid, " sz=", sz, " h=", sispopc::to_hex(pos, p2), " from ", m_RemoteAddr);
       m_LastRX = m_Parent->Now();
       {
         // check for replay
@@ -840,8 +840,8 @@ namespace llarp
         return;
       }
       m_LastRX = m_Parent->Now();
-      auto sz = oxenc::load_big_to_host<uint16_t>(data.data() + CommandOverhead + PacketOverhead);
-      auto rxid = oxenc::load_big_to_host<uint64_t>(
+      auto sz = sispopc::load_big_to_host<uint16_t>(data.data() + CommandOverhead + PacketOverhead);
+      auto rxid = sispopc::load_big_to_host<uint64_t>(
           data.data() + CommandOverhead + sizeof(uint16_t) + PacketOverhead);
       auto itr = m_RXMsgs.find(rxid);
       if (itr == m_RXMsgs.end())
@@ -850,7 +850,7 @@ namespace llarp
         {
           LogTrace("no rxid=", rxid, " for ", m_RemoteAddr);
           auto nack = CreatePacket(Command::eNACK, 8);
-          oxenc::write_host_as_big(rxid, nack.data() + PacketOverhead + CommandOverhead);
+          sispopc::write_host_as_big(rxid, nack.data() + PacketOverhead + CommandOverhead);
           EncryptAndSend(std::move(nack));
         }
         else
@@ -903,7 +903,7 @@ namespace llarp
       }
       const auto now = m_Parent->Now();
       m_LastRX = now;
-      auto txid = oxenc::load_big_to_host<uint64_t>(data.data() + 2 + PacketOverhead);
+      auto txid = sispopc::load_big_to_host<uint64_t>(data.data() + 2 + PacketOverhead);
       auto itr = m_TXMsgs.find(txid);
       if (itr == m_TXMsgs.end())
       {

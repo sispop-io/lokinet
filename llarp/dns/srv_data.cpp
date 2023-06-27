@@ -4,7 +4,7 @@
 
 #include <limits>
 
-#include <oxenc/bt_serialize.h>
+#include <sispopc/bt_serialize.h>
 #include "llarp/util/bencode.h"
 #include "llarp/util/types.hpp"
 
@@ -108,7 +108,7 @@ namespace llarp::dns
   bool
   SRVData::BEncode(llarp_buffer_t* buf) const
   {
-    const std::string data = oxenc::bt_serialize(toTuple());
+    const std::string data = sispopc::bt_serialize(toTuple());
     return buf->write(data.begin(), data.end());
   }
 
@@ -124,11 +124,11 @@ namespace llarp::dns
     try
     {
       SRVTuple tuple{};
-      oxenc::bt_deserialize(srvString, tuple);
+      sispopc::bt_deserialize(srvString, tuple);
       *this = fromTuple(std::move(tuple));
       return IsValid();
     }
-    catch (const oxenc::bt_deserialize_invalid&)
+    catch (const sispopc::bt_deserialize_invalid&)
     {
       return false;
     };

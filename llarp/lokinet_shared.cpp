@@ -12,7 +12,7 @@
 #include <llarp/util/logging/buffer.hpp>
 #include <llarp/util/logging/callback_sink.hpp>
 
-#include <oxenc/base32z.h>
+#include <sispopc/base32z.h>
 
 #include <mutex>
 #include <memory>
@@ -801,15 +801,15 @@ extern "C"
   lokinet_hex_to_base32z(const char* hex)
   {
     std::string_view hexview{hex};
-    if (not oxenc::is_hex(hexview))
+    if (not sispopc::is_hex(hexview))
       return nullptr;
 
-    const size_t b32z_len = oxenc::to_base32z_size(oxenc::from_hex_size(hexview.size()));
+    const size_t b32z_len = sispopc::to_base32z_size(sispopc::from_hex_size(hexview.size()));
     auto buf = std::make_unique<char[]>(b32z_len + 1);
     buf[b32z_len] = '\0';  // null terminate
 
-    oxenc::hex_decoder decode{hexview.begin(), hexview.end()};
-    oxenc::base32z_encoder encode{decode, decode.end()};
+    sispopc::hex_decoder decode{hexview.begin(), hexview.end()};
+    sispopc::base32z_encoder encode{decode, decode.end()};
     std::copy(encode, encode.end(), buf.get());
     return buf.release();  // leak the buffer to the caller
   }

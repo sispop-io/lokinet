@@ -2,7 +2,7 @@
 #include <llarp/net/net.hpp>
 #include <llarp/net/ip.hpp>
 #include <llarp/util/str.hpp>
-#include <oxenc/hex.h>
+#include <sispopc/hex.h>
 
 namespace llarp
 {
@@ -98,8 +98,8 @@ namespace llarp
         auto in_pos = in.data();
         for (size_t i = 0; i < 64; i += 4)
         {
-          if (not(oxenc::is_hex_digit(name[i]) and name[i + 1] == '.'
-                  and oxenc::is_hex_digit(name[i + 2]) and name[i + 3] == '.'))
+          if (not(sispopc::is_hex_digit(name[i]) and name[i + 1] == '.'
+                  and sispopc::is_hex_digit(name[i + 2]) and name[i + 3] == '.'))
             return std::nullopt;
 
           // Flip the nybbles because the smallest one is first
@@ -111,10 +111,10 @@ namespace llarp
         static_assert(in.size() == 2 * sizeof(ip.h));
         // our string right now is the little endian representation, so load it as such on little
         // endian, or in reverse on big endian.
-        if constexpr (oxenc::little_endian)
-          oxenc::from_hex(in.begin(), in.end(), reinterpret_cast<uint8_t*>(&ip.h));
+        if constexpr (sispopc::little_endian)
+          sispopc::from_hex(in.begin(), in.end(), reinterpret_cast<uint8_t*>(&ip.h));
         else
-          oxenc::from_hex(in.rbegin(), in.rend(), reinterpret_cast<uint8_t*>(&ip.h));
+          sispopc::from_hex(in.rbegin(), in.rend(), reinterpret_cast<uint8_t*>(&ip.h));
 
         return ip;
       }

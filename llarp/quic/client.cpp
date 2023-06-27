@@ -3,7 +3,7 @@
 #include <llarp/util/logging/buffer.hpp>
 #include <llarp/util/logging.hpp>
 
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 #include <llarp/service/address.hpp>
 #include <llarp/service/endpoint.hpp>
 #include <llarp/ev/libuv.hpp>

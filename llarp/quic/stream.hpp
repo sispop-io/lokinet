@@ -7,7 +7,7 @@
 #include <functional>
 #include <string_view>
 #include <type_traits>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 #include <vector>
 #include <optional>
 #include <uvw/async.h>

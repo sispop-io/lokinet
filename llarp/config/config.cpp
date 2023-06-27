@@ -732,7 +732,7 @@ namespace llarp
             "    srv=_service._protocol priority weight port target.loki",
             "and can be specified multiple times as needed.",
             "For more info see",
-            "https://docs.oxen.io/products-built-on-oxen/lokinet/snapps/hosting-snapps",
+            "https://docs.sispop.io/products-built-on-sispop/lokinet/snapps/hosting-snapps",
             "and general description of DNS SRV record configuration.",
         },
         [this](std::string arg) {
@@ -791,7 +791,7 @@ namespace llarp
 #ifdef __linux__
 #ifdef WITH_SYSTEMD
         // when we have systemd support add a random high port on loopback as well
-        // see https://github.com/oxen-io/lokinet/issues/1887#issuecomment-1091897282
+        // see https://github.com/sispop-io/lokinet/issues/1887#issuecomment-1091897282
         Default{"127.0.0.1:0"},
 #endif
         Default{"127.3.2.1:53"},
@@ -1162,7 +1162,7 @@ namespace llarp
         RelayOnly,
         Default{true},
         Comment{
-            "Whether or not we should talk to oxend. Must be enabled for staked routers.",
+            "Whether or not we should talk to sispopd. Must be enabled for staked routers.",
         },
         AssignmentAcceptor(whitelistRouters));
 
@@ -1171,8 +1171,8 @@ namespace llarp
         return;
       throw std::invalid_argument(
           "the [lokid]:jsonrpc option is no longer supported; please use the [lokid]:rpc config "
-          "option instead with oxend's lmq-local-control address -- typically a value such as "
-          "rpc=ipc:///var/lib/oxen/oxend.sock or rpc=ipc:///home/snode/.oxen/oxend.sock");
+          "option instead with sispopd's lmq-local-control address -- typically a value such as "
+          "rpc=ipc:///var/lib/sispop/sispopd.sock or rpc=ipc:///home/snode/.sispop/sispopd.sock");
     });
 
     conf.defineOption<std::string>(
@@ -1181,15 +1181,15 @@ namespace llarp
         RelayOnly,
         Required,
         Comment{
-            "oxenmq control address for for communicating with oxend. Depends on oxend's",
+            "sispopmq control address for for communicating with sispopd. Depends on sispopd's",
             "lmq-local-control configuration option. By default this value should be",
-            "ipc://OXEND-DATA-DIRECTORY/oxend.sock, such as:",
-            "    rpc=ipc:///var/lib/oxen/oxend.sock",
-            "    rpc=ipc:///home/USER/.oxen/oxend.sock",
-            "but can use (non-default) TCP if oxend is configured that way:",
+            "ipc://SISPOPD-DATA-DIRECTORY/sispopd.sock, such as:",
+            "    rpc=ipc:///var/lib/sispop/sispopd.sock",
+            "    rpc=ipc:///home/USER/.sispop/sispopd.sock",
+            "but can use (non-default) TCP if sispopd is configured that way:",
             "    rpc=tcp://127.0.0.1:5678",
         },
-        [this](std::string arg) { lokidRPCAddr = oxenmq::address(arg); });
+        [this](std::string arg) { lokidRPCAddr = sispopmq::address(arg); });
 
     // Deprecated options:
     conf.defineOption<std::string>("lokid", "username", Deprecated);
@@ -1632,11 +1632,11 @@ namespace llarp
     initializeConfig(def, *params);
     generateCommonConfigComments(def);
 
-    // oxend
+    // sispopd
     def.addSectionComments(
         "lokid",
         {
-            "Settings for communicating with oxend",
+            "Settings for communicating with sispopd",
         });
 
     return def.generateINIConfig(true);

@@ -8,13 +8,13 @@ Lokinet - реализация LLARP (протокол анонимной мар
 
 Почитать спецификацию протокола LLARP [здесь](docs/proto_v0.txt)
 
-Почитать документацию о том, как начать работу [здесь](https://oxen-io.github.io/loki-docs/Lokinet/LokinetOverview/)
+Почитать документацию о том, как начать работу [здесь](https://sispop-io.github.io/loki-docs/Lokinet/LokinetOverview/)
 
-[![Build Status](https://drone.lokinet.dev/api/badges/oxen-io/lokinet/status.svg?ref=refs/heads/master)](https://drone.lokinet.dev/oxen-io/lokinet)
+[![Build Status](https://drone.lokinet.dev/api/badges/sispop-io/lokinet/status.svg?ref=refs/heads/master)](https://drone.lokinet.dev/sispop-io/lokinet)
 
 ## Использование
 
-О том как начать работу см. [Документацию](https://oxen-io.github.io/loki-docs/Lokinet/LokinetOverview/)
+О том как начать работу см. [Документацию](https://sispop-io.github.io/loki-docs/Lokinet/LokinetOverview/)
 
 Также прочтите [Public Testing Guide](https://lokidocs.com/Lokinet/Guides/PublicTestingGuide/#1-lokinet-installation) для установки и другой полезной информации.
 
@@ -72,7 +72,7 @@ Lokinet - реализация LLARP (протокол анонимной мар
 сборка:
 
     $ sudo apt install build-essential cmake git libcap-dev curl libuv1-dev libsodium-dev pkg-config
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -88,7 +88,7 @@ Lokinet - реализация LLARP (протокол анонимной мар
 сборка:
     убедитесь, что у вас установлены инструменты командной строки cmake, libuv и xcode
 
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -114,7 +114,7 @@ Lokinet - реализация LLARP (протокол анонимной мар
 
 сборка:
 
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build-windows
     $ cd build-windows
@@ -134,7 +134,7 @@ Lokinet - реализация LLARP (протокол анонимной мар
     $ sudo pkg install build-essential gcc8 wget tuntap cmake (optional: ninja ccache - from omnios extra) (OmniOS CE)
     $ sudo pkg install base-developer-utilities developer-gnu developer-studio-utilities gcc-7 wget cmake (Oracle Solaris, see note)
     $ sudo pkg install build-essential wget gcc-8 documentation/tuntap header-tun tun (optional: ninja ccache) (all other SunOS)
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -150,7 +150,7 @@ Lokinet - реализация LLARP (протокол анонимной мар
 сборка:
 
     $ pkg install cmake git curl libuv libsodium pkgconf libunbound
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cmake -DCMAKE_BUILD_TYPE=Release ..

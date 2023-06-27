@@ -16,7 +16,7 @@
 #include <llarp/util/buffer.hpp>
 #include <llarp/tooling/path_event.hpp>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 #include <deque>
 #include <queue>
@@ -898,7 +898,7 @@ namespace llarp
       {
         if (pkt.size() <= 8)
           continue;
-        auto counter = oxenc::load_big_to_host<uint64_t>(pkt.data());
+        auto counter = sispopc::load_big_to_host<uint64_t>(pkt.data());
         if (m_ExitTrafficHandler(
                 self, llarp_buffer_t(pkt.data() + 8, pkt.size() - 8), counter, msg.protocol))
         {

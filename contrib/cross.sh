@@ -50,7 +50,7 @@ for arch in $archs ; do
         -DNATIVE_BUILD=OFF \
         -DSTATIC_LINK=ON \
         -DWITH_SYSTEMD=OFF \
-        -DFORCE_OXENMQ_SUBMODULE=ON \
+        -DFORCE_SISPOPMQ_SUBMODULE=ON \
         -DSUBMODULE_CHECK=OFF \
         -DWITH_LTO=OFF \
         -DWITH_BOOTSTRAP=OFF \

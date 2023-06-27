@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 /**
  * address_info.hpp

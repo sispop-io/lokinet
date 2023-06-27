@@ -5,7 +5,7 @@
 
 #include <iterator>
 
-#include <oxenc/hex.h>
+#include <sispopc/hex.h>
 
 #include <sodium/crypto_sign.h>
 #include <sodium/crypto_sign_ed25519.h>
@@ -18,14 +18,14 @@ namespace llarp
   {
     if (str.size() != 2 * size())
       return false;
-    oxenc::from_hex(str.begin(), str.end(), begin());
+    sispopc::from_hex(str.begin(), str.end(), begin());
     return true;
   }
 
   std::string
   PubKey::ToString() const
   {
-    return oxenc::to_hex(begin(), end());
+    return sispopc::to_hex(begin(), end());
   }
 
   bool

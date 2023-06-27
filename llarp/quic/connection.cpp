@@ -15,8 +15,8 @@
 #include <uvw/timer.h>
 
 #include <iterator>
-#include <oxenc/hex.h>
-#include <oxenc/bt_serialize.h>
+#include <sispopc/hex.h>
+#include <sispopc/bt_serialize.h>
 
 extern "C"
 {
@@ -35,7 +35,7 @@ namespace llarp::quic
   std::string
   ConnectionID::ToString() const
   {
-    return oxenc::to_hex(data, data + datalen);
+    return sispopc::to_hex(data, data + datalen);
   }
 
   ConnectionID
@@ -297,7 +297,7 @@ namespace llarp::quic
       conn.endpoint.make_stateless_reset_token(cid, token);
       LogDebug(
           "make stateless reset token ",
-          oxenc::to_hex(token, token + NGTCP2_STATELESS_RESET_TOKENLEN));
+          sispopc::to_hex(token, token + NGTCP2_STATELESS_RESET_TOKENLEN));
 
       return 0;
     }
@@ -1091,7 +1091,7 @@ namespace llarp::quic
     uint16_t port;
     try
     {
-      oxenc::bt_dict_consumer meta{lokinet_metadata};
+      sispopc::bt_dict_consumer meta{lokinet_metadata};
       // '#' contains the port the client wants us to forward to
       if (!meta.skip_until("#"))
       {
@@ -1106,7 +1106,7 @@ namespace llarp::quic
       }
       LogDebug("decoded lokinet tunnel port = ", port);
     }
-    catch (const oxenc::bt_deserialize_invalid& c)
+    catch (const sispopc::bt_deserialize_invalid& c)
     {
       LogWarn("transport params lokinet metadata is invalid: ", c.what());
       return NGTCP2_ERR_TRANSPORT_PARAM;
@@ -1189,7 +1189,7 @@ namespace llarp::quic
       // reserved field code that QUIC parsers must ignore); currently we only include the port in
       // here (from the client to tell the server what it's trying to reach, and reflected from
       // the server for the client to verify).
-      std::string lokinet_metadata = bt_serialize(oxenc::bt_dict{
+      std::string lokinet_metadata = bt_serialize(sispopc::bt_dict{
           {"#", tunnel_port},
       });
       copy_and_advance(buf, lokinet_metadata_code);

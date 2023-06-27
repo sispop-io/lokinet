@@ -23,9 +23,9 @@
 struct llarp_buffer_t;
 struct llarp_dht_context;
 
-namespace oxenmq
+namespace sispopmq
 {
-  class OxenMQ;
+  class SispopMQ;
 }
 
 namespace llarp
@@ -90,7 +90,7 @@ namespace llarp
     class Platform;
   }
 
-  using LMQ_ptr = std::shared_ptr<oxenmq::OxenMQ>;
+  using LMQ_ptr = std::shared_ptr<sispopmq::SispopMQ>;
 
   struct AbstractRouter : public std::enable_shared_from_this<AbstractRouter>
   {
@@ -199,12 +199,12 @@ namespace llarp
     virtual bool
     IsServiceNode() const = 0;
 
-    /// Called to determine if we're in a bad state (which gets reported to our oxend) that should
+    /// Called to determine if we're in a bad state (which gets reported to our sispopd) that should
     /// prevent uptime proofs from going out to the network (so that the error state gets noticed).
     /// Currently this means we require a decent number of peers whenever we are fully staked
     /// (active or decommed).
     virtual std::optional<std::string>
-    OxendErrorState() const = 0;
+    SispopdErrorState() const = 0;
 
     virtual bool
     StartRpcServer() = 0;

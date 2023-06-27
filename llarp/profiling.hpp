@@ -8,11 +8,11 @@
 #include "util/thread/annotations.hpp"
 #include <map>
 
-namespace oxenc
+namespace sispopc
 {
   class bt_dict_consumer;
   class bt_dict_producer;
-}  // namespace oxenc
+}  // namespace sispopc
 
 namespace llarp
 {
@@ -29,18 +29,18 @@ namespace llarp
     uint64_t version = llarp::constants::proto_version;
 
     RouterProfile() = default;
-    RouterProfile(oxenc::bt_dict_consumer dict);
+    RouterProfile(sispopc::bt_dict_consumer dict);
 
     void
-    BEncode(oxenc::bt_dict_producer& dict) const;
+    BEncode(sispopc::bt_dict_producer& dict) const;
     void
-    BEncode(oxenc::bt_dict_producer&& dict) const
+    BEncode(sispopc::bt_dict_producer&& dict) const
     {
       BEncode(dict);
     }
 
     void
-    BDecode(oxenc::bt_dict_consumer dict);
+    BDecode(sispopc::bt_dict_consumer dict);
 
     bool
     IsGood(uint64_t chances) const;
@@ -120,10 +120,10 @@ namespace llarp
 
    private:
     void
-    BEncode(oxenc::bt_dict_producer& dict) const;
+    BEncode(sispopc::bt_dict_producer& dict) const;
 
     void
-    BDecode(oxenc::bt_dict_consumer dict);
+    BDecode(sispopc::bt_dict_consumer dict);
 
     mutable util::Mutex m_ProfilesMutex;  // protects m_Profiles
     std::map<RouterID, RouterProfile> m_Profiles GUARDED_BY(m_ProfilesMutex);

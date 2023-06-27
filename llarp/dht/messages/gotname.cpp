@@ -1,5 +1,5 @@
 #include "gotname.hpp"
-#include <oxenc/bt_serialize.h>
+#include <sispopc/bt_serialize.h>
 #include <llarp/dht/context.hpp>
 #include <llarp/router/abstractrouter.hpp>
 #include <llarp/path/path_context.hpp>
@@ -19,8 +19,8 @@ namespace llarp::dht
   GotNameMessage::BEncode(llarp_buffer_t* buf) const
   {
     const std::string nonce((const char*)result.nonce.data(), result.nonce.size());
-    const auto data = oxenc::bt_serialize(
-        oxenc::bt_dict{{"A", "M"sv}, {"D", result.ciphertext}, {"N", nonce}, {"T", TxID}});
+    const auto data = sispopc::bt_serialize(
+        sispopc::bt_dict{{"A", "M"sv}, {"D", result.ciphertext}, {"N", nonce}, {"T", TxID}});
     return buf->write(data.begin(), data.end());
   }
 

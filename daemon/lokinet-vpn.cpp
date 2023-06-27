@@ -1,4 +1,4 @@
-#include <oxenmq/oxenmq.h>
+#include <sispopmq/sispopmq.h>
 #include <nlohmann/json.hpp>
 #include <fmt/core.h>
 #include <cxxopts.hpp>
@@ -17,12 +17,12 @@
 #include <sys/wait.h>
 #endif
 
-/// do a oxenmq request on an omq instance blocking style
+/// do a sispopmq request on an omq instance blocking style
 /// returns a json object parsed from the result
 std::optional<nlohmann::json>
 OMQ_Request(
-    oxenmq::OxenMQ& omq,
-    const oxenmq::ConnectionID& id,
+    sispopmq::SispopMQ& omq,
+    const sispopmq::ConnectionID& id,
     std::string_view method,
     std::optional<nlohmann::json> args = std::nullopt)
 {
@@ -116,12 +116,12 @@ main(int argc, char* argv[])
     ("range", "ip range to map", cxxopts::value<std::string>())
     ;
   // clang-format on
-  oxenmq::address rpcURL("tcp://127.0.0.1:1190");
+  sispopmq::address rpcURL("tcp://127.0.0.1:1190");
   std::string exitAddress;
   std::string endpoint = "default";
   std::string token;
   std::optional<std::string> range;
-  oxenmq::LogLevel logLevel = oxenmq::LogLevel::warn;
+  sispopmq::LogLevel logLevel = sispopmq::LogLevel::warn;
   bool goUp = false;
   bool goDown = false;
   bool printStatus = false;
@@ -138,7 +138,7 @@ main(int argc, char* argv[])
 
     if (result.count("verbose") > 0)
     {
-      logLevel = oxenmq::LogLevel::debug;
+      logLevel = sispopmq::LogLevel::debug;
     }
     goUp = result.count("up") > 0;
     goDown = result.count("down") > 0;
@@ -171,8 +171,8 @@ main(int argc, char* argv[])
   if (goUp and exitAddress.empty())
     return exit_error("no exit address provided");
 
-  oxenmq::OxenMQ omq{
-      [](oxenmq::LogLevel lvl, const char* file, int line, std::string msg) {
+  sispopmq::SispopMQ omq{
+      [](sispopmq::LogLevel lvl, const char* file, int line, std::string msg) {
         std::cout << lvl << " [" << file << ":" << line << "] " << msg << std::endl;
       },
       logLevel};

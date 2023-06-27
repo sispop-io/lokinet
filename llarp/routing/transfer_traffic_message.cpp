@@ -3,7 +3,7 @@
 #include "handler.hpp"
 #include <llarp/util/bencode.hpp>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 namespace llarp
 {
@@ -16,7 +16,7 @@ namespace llarp
         return false;
       X.emplace_back(buf.sz + 8);
       byte_t* ptr = X.back().data();
-      oxenc::write_host_as_big(counter, ptr);
+      sispopc::write_host_as_big(counter, ptr);
       ptr += 8;
       memcpy(ptr, buf.base, buf.sz);
       // 8 bytes encoding overhead and 8 bytes counter

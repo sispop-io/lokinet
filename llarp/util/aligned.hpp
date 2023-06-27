@@ -4,7 +4,7 @@
 #include <llarp/util/logging.hpp>
 #include <llarp/util/formattable.hpp>
 
-#include <oxenc/hex.h>
+#include <sispopc/hex.h>
 
 #include <array>
 #include <cstddef>
@@ -269,21 +269,21 @@ namespace llarp
     std::string
     ToHex() const
     {
-      return oxenc::to_hex(begin(), end());
+      return sispopc::to_hex(begin(), end());
     }
 
     std::string
     ShortHex() const
     {
-      return oxenc::to_hex(begin(), begin() + 4);
+      return sispopc::to_hex(begin(), begin() + 4);
     }
 
     bool
     FromHex(std::string_view str)
     {
-      if (str.size() != 2 * size() || !oxenc::is_hex(str))
+      if (str.size() != 2 * size() || !sispopc::is_hex(str))
         return false;
-      oxenc::from_hex(str.begin(), str.end(), begin());
+      sispopc::from_hex(str.begin(), str.end(), begin());
       return true;
     }
 
@@ -321,7 +321,7 @@ namespace fmt
     auto
     format(const T& val, FormatContext& ctx)
     {
-      auto it = oxenc::hex_encoder{val.begin(), val.end()};
+      auto it = sispopc::hex_encoder{val.begin(), val.end()};
       return std::copy(it, it.end(), ctx.out());
     }
   };

@@ -14,7 +14,7 @@ extern "C"
 
 namespace
 {
-  using namespace oxen::log::literals;
+  using namespace sispop::log::literals;
 
   std::string
   windivert_addr_to_string(const WINDIVERT_ADDRESS& addr)

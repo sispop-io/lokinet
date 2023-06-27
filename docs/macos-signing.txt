@@ -37,12 +37,12 @@ In order to make things work, you'll have to replace these provisioning profiles
 team/application/bundle IDs to reference your own team, matching the provisioning profiles.  The dev
 provisioning profiles must be a "macOS Development" provisioning profile, and must include the
 signing keys and the authorized devices on which you want to run it.  (The profiles bundled in this
-repository contains the lokinet team's "Apple Development" keys associated with the Oxen project,
+repository contains the lokinet team's "Apple Development" keys associated with the Sispop project,
 and mac dev boxes.  This is *useless* for anyone else).
 
 For release builds, you still need a provisioning profile, but it must be a "Distribution: Developer
 ID" provisioning profile, and are tied to a (paid) Developer ID.  The ones in the repository are
-attached to the Oxen Project Developer ID and are useless to anyone else.
+attached to the Sispop Project Developer ID and are useless to anyone else.
 
 Once you have that in place, you need to build and sign the package using a certificate matching
 your provisioning profile before your Apple system will allow it to run.  (That's right, your $2000

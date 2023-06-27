@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <functional>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 namespace llarp
 {
@@ -308,8 +308,8 @@ ntoh128(llarp::uint128_t i)
 #ifdef __BIG_ENDIAN__
   return i;
 #else
-  const auto loSwapped = oxenc::big_to_host(i.lower);
-  const auto hiSwapped = oxenc::big_to_host(i.upper);
+  const auto loSwapped = sispopc::big_to_host(i.lower);
+  const auto hiSwapped = sispopc::big_to_host(i.upper);
   return {/*upper=*/loSwapped, /*lower=*/hiSwapped};
 #endif
 }

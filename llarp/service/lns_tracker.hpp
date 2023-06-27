@@ -8,7 +8,7 @@
 
 #include "address.hpp"
 #include <llarp/router_id.hpp>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 namespace llarp::service
 {

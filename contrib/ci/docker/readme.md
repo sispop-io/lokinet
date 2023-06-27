@@ -1,9 +1,9 @@
 ## drone-ci docker jizz
 
-To rebuild all ci images and push them to the oxen registry server do:
+To rebuild all ci images and push them to the sispop registry server do:
 
-    $ docker login registry.oxen.rocks
+    $ docker login registry.sispop.rocks
     $ ./rebuild-docker-images.py
 
-If you aren't part of the Oxen team, you'll likely need to set up your own registry and change
-registry.oxen.rocks to your own domain name in order to do anything useful with this.
+If you aren't part of the Sispop team, you'll likely need to set up your own registry and change
+registry.sispop.rocks to your own domain name in order to do anything useful with this.

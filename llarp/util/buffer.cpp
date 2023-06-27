@@ -1,5 +1,5 @@
 #include "buffer.hpp"
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 #include <cstdarg>
 #include <cstdio>
@@ -29,7 +29,7 @@ namespace
   {
     if (buf.size_left() < sizeof(UInt))
       return false;
-    oxenc::write_host_as_big(i, buf.cur);
+    sispopc::write_host_as_big(i, buf.cur);
     buf.cur += sizeof(UInt);
     return true;
   }
@@ -40,7 +40,7 @@ namespace
   {
     if (buf.size_left() < sizeof(UInt))
       return false;
-    i = oxenc::load_big_to_host<UInt>(buf.cur);
+    i = sispopc::load_big_to_host<UInt>(buf.cur);
     buf.cur += sizeof(UInt);
     return true;
   }

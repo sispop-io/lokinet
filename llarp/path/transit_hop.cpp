@@ -15,7 +15,7 @@
 #include <llarp/routing/handler.hpp>
 #include <llarp/util/buffer.hpp>
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 
 namespace llarp
 {
@@ -396,7 +396,7 @@ namespace llarp
           // check short packet buffer
           if (pkt.size() <= 8)
             continue;
-          auto counter = oxenc::load_big_to_host<uint64_t>(pkt.data());
+          auto counter = sispopc::load_big_to_host<uint64_t>(pkt.data());
           llarp_buffer_t buf{pkt.data() + 8, pkt.size() - 8};
           sent =
               endpoint->QueueOutboundTraffic(info.rxID, buf.copy(), counter, msg.protocol) and sent;

@@ -2,7 +2,7 @@
 #include <llarp/util/logging.hpp>
 #include <llarp/util/logging/buffer.hpp>
 
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 #include <uvw/loop.h>
 
 #include <stdexcept>

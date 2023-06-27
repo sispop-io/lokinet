@@ -95,7 +95,7 @@ namespace llarp
   fs::path
   NodeDB::GetPathForPubkey(RouterID pubkey) const
   {
-    std::string hexString = oxenc::to_hex(pubkey.begin(), pubkey.end());
+    std::string hexString = sispopc::to_hex(pubkey.begin(), pubkey.end());
     std::string skiplistDir;
 
     const llarp::RouterID r{pubkey};

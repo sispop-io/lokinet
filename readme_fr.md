@@ -6,7 +6,7 @@ Lokinet est l'implementation de référence du LLARP (Low Latency Anonymous Rout
 
 Vous pouvez en savoir plus sur le haut niveau de conception du LLARP [ici](docs/)
 
-[![Build Status](https://ci.oxen.rocks/api/badges/oxen-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.oxen.rocks/oxen-io/lokinet)
+[![Build Status](https://ci.sispop.rocks/api/badges/sispop-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.sispop.rocks/sispop-io/lokinet)
 
 ## Installer
 
@@ -47,19 +47,19 @@ Packets necessaires pour construire:
 
 ### Linux <span id="linux-install" />
 
-Vous n'avez pas besoin de construire les paquets à partir des sources si vous êtes sous debian ou ubuntu car nous avons des dépôts apt avec des paquets lokinet pré-construits sur `deb.oxen.io` ou `rpm.oxen.io`.
+Vous n'avez pas besoin de construire les paquets à partir des sources si vous êtes sous debian ou ubuntu car nous avons des dépôts apt avec des paquets lokinet pré-construits sur `deb.sispop.io` ou `rpm.sispop.io`.
 
 Vous pouvez installer les paquets debian en utilisant :
 
-    $ sudo curl -so /etc/apt/trusted.gpg.d/oxen.gpg https://deb.oxen.io/pub.gpg
-    $ echo "deb https://deb.oxen.io $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/oxen.list
+    $ sudo curl -so /etc/apt/trusted.gpg.d/sispop.gpg https://deb.sispop.io/pub.gpg
+    $ echo "deb https://deb.sispop.io $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sispop.list
     $ sudo apt update
     $ sudo apt install lokinet
 
 Si vous voulez construire lokinet à partir des sources :
 
     $ sudo apt install build-essential cmake git libcap-dev pkg-config automake libtool libuv1-dev libsodium-dev libzmq3-dev libcurl4-openssl-dev libevent-dev nettle-dev libunbound-dev libsqlite3-dev libssl-dev nlohmann-json3-dev
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -69,7 +69,7 @@ Si vous voulez construire lokinet à partir des sources :
 
 #### Arch Linux <span id="mom-cancel-my-meetings-arch-linux-broke-again" />
 
-En raison de [circonstances indépendantes de notre volonté](https://github.com/oxen-io/lokinet/discussions/1823) un `PKGBUILD` fonctionnel peut être trouvé [ici](https://raw.githubusercontent.com/oxen-io/lokinet/makepkg/contrib/archlinux/PKGBUILD).
+En raison de [circonstances indépendantes de notre volonté](https://github.com/sispop-io/lokinet/discussions/1823) un `PKGBUILD` fonctionnel peut être trouvé [ici](https://raw.githubusercontent.com/sispop-io/lokinet/makepkg/contrib/archlinux/PKGBUILD).
 
 #### Compilation croisée pour Linux <span id="linux-cross" />
 
@@ -98,10 +98,10 @@ La compilation du code source de Lokinet par les utilisateurs finaux n'est pas s
 
 ### Windows <span id="windows-install" />
 
-Vous pouvez obtenir la dernière version stable de Windows à l'adresse https://lokinet.org/ ou consulter la [page des versions sur github] (https://github.com/oxen-io/lokinet/releases).
+Vous pouvez obtenir la dernière version stable de Windows à l'adresse https://lokinet.org/ ou consulter la [page des versions sur github] (https://github.com/sispop-io/lokinet/releases).
 
 
-les compilation automatique de nuit pour les courageux ou les impatients peuvent être trouvées à partir de notre pipeline CI [ici](https://oxen.rocks/oxen-io/lokinet/)
+les compilation automatique de nuit pour les courageux ou les impatients peuvent être trouvées à partir de notre pipeline CI [ici](https://sispop.rocks/sispop-io/lokinet/)
 
 #### Construire les paquets sur Windows <span id="win32-cross" />
 
@@ -120,7 +120,7 @@ configuration:
 
 building:
 
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ ./contrib/windows.sh
 
@@ -131,7 +131,7 @@ Currently has no VPN Platform code, see #1513
 construction:
 
     $ pkg install cmake git pkgconf
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -146,10 +146,10 @@ installation (root):
 
 Nous avons un APK Android pour le VPN lokinet via l'API VPN android. 
 
-A venir sur F-Droid quand cela arrivera. [[issue]](https://github.com/oxen-io/lokinet-flutter-app/issues/8)
+A venir sur F-Droid quand cela arrivera. [[issue]](https://github.com/sispop-io/lokinet-flutter-app/issues/8)
 
-* [code source](https://github.com/oxen-io/lokinet-flutter-app)
-* [CI builds](https://oxen.rocks/oxen-io/lokinet/)
+* [code source](https://github.com/sispop-io/lokinet-flutter-app)
+* [CI builds](https://sispop.rocks/sispop-io/lokinet/)
 
 ## Usage
 
@@ -184,6 +184,6 @@ Cela nécessite que le binaire ait les capacités appropriées, ce qui est gén�
 Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU telle que publiée par la Free Software Foundation, soit la version 3 de la Licence, soit (au choix) toute version ultérieure.
 
 ```
-Copyright © 2018-2022 The Oxen Project
+Copyright © 2018-2022 The Sispop Project
 Copyright © 2018-2022 Jeff Becker
 Copyright © 2018-2020 Rick V. (Historical Windows NT port and portions)

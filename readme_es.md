@@ -8,14 +8,14 @@ Puede aprender a grandes razgos sobre el diseño de LLARP [aquí](docs/high-leve
 
 Y puede leer las especificaciones del protocolo [aquí](docs/proto_v0.txt) , documento técnico en idioma ingles.
 
-Puede ver la documentación, en ingles, de como empezar [aqui](https://oxen-io.github.io/loki-docs/Lokinet/LokinetOverview/) .
+Puede ver la documentación, en ingles, de como empezar [aqui](https://sispop-io.github.io/loki-docs/Lokinet/LokinetOverview/) .
 
-[![Build Status](https://ci.oxen.rocks/api/badges/oxen-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.oxen.rocks/oxen-io/lokinet)
+[![Build Status](https://ci.sispop.rocks/api/badges/sispop-io/lokinet/status.svg?ref=refs/heads/dev)](https://ci.sispop.rocks/sispop-io/lokinet)
 
 
 ## Uso
 
-Vea, en ingles, [documentación](https://oxen-io.github.io/loki-docs/Lokinet/LokinetOverview/) en como comenzar.
+Vea, en ingles, [documentación](https://sispop-io.github.io/loki-docs/Lokinet/LokinetOverview/) en como comenzar.
 
 También lea, en ingles, [La guia de pruebas publicas](https://lokidocs.com/Lokinet/Guides/PublicTestingGuide/#1-lokinet-installation) para la instalación y mas información util.
 
@@ -81,7 +81,7 @@ Requerimientos de compilación:
 compilando:
 
     $ sudo apt install build-essential cmake git libcap-dev curl libuv1-dev libsodium-dev pkg-config
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -104,7 +104,7 @@ esto coloca el paquete compilado en `../`
 compilando:
     este seguro que usted tiene cmake, libuv y las herramientas de terminal de xcode ya instaladas
 
-     $ git clone --recursive https://github.com/oxen-io/lokinet
+     $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -120,7 +120,7 @@ instalando:
 compilar (donde `$ARCH` es su plataforma - `i686` or `x86_64`):
 
     $ pacman -Sy base-devel mingw-w64-$ARCH-toolchain git libtool autoconf mingw-w64-$ARCH-cmake
-    $ git clone https://github.com/oxen-io/lokinet.git
+    $ git clone https://github.com/sispop-io/lokinet.git
     $ cd lokinet
     $ mkdir -p build; cd build
     $ cmake .. -DCMAKE_BUILD_TYPE=[Debug|Release] -DSTATIC_LINK_RUNTIME=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G 'Unix Makefiles'
@@ -150,7 +150,7 @@ compilando:
     $ sudo pkg install build-essential gcc8 wget tuntap cmake (opcional: ninja ccache - de los extra de omnios) (OmniOS CE)
     $ sudo pkg install base-developer-utilities developer-gnu developer-studio-utilities gcc-7 wget cmake (Solaris de Oracle, ver notas)
     $ sudo pkg install build-essential wget gcc-8 documentation/tuntap header-tun tun (opcional: ninja ccache) (todos los demas SunOS)
-    $ git clone https://github.com/oxen-io/lokinet
+    $ git clone https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ gmake -j8
 
@@ -168,7 +168,7 @@ PENDIENTE: agregar instrucciones para pkgsrc
 compilando:
 
     # pkg_add curl cmake git (opcional: ninja ccache)
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -184,7 +184,7 @@ instalando (root):
 compilando:
 
     $ pkg install cmake git curl libuv-1.27.0 libsodium
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build

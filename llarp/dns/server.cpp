@@ -13,7 +13,7 @@
 #include <unbound.h>
 #include <uvw.hpp>
 
-#include "oxen/log.hpp"
+#include "sispop/log.hpp"
 #include "sd_platform.hpp"
 #include "nm_platform.hpp"
 
@@ -742,7 +742,7 @@ namespace llarp::dns
     // TLS needs X509/ASN.1-DER and opting into the Root CA Cabal
     // thankfully mozilla added a backdoor that allows ISPs to turn it off
     // so we disable DoH for firefox using mozilla's ISP backdoor
-    // see: https://github.com/oxen-io/lokinet/issues/832
+    // see: https://github.com/sispop-io/lokinet/issues/832
     for (const auto& q : msg.questions)
     {
       // is this firefox looking for their backdoor record?

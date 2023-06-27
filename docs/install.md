@@ -24,7 +24,7 @@ Currently Unsupported Platforms: (maintainers welcome)
 
 ### Windows / MacOS <span id="windows-install" />  <span id="macos-install" />
 
-You can get the latest stable release for lokinet on windows or macos from https://lokinet.org/ or check the [releases page on github](https://github.com/oxen-io/lokinet/releases).
+You can get the latest stable release for lokinet on windows or macos from https://lokinet.org/ or check the [releases page on github](https://github.com/sispop-io/lokinet/releases).
 
 ### Linux <span id="linux-install" />
 
@@ -32,10 +32,10 @@ You do not have to build from source if you do not wish to, we provide [apt](#de
 
 #### APT repository <span id="deb-install" />
 
-You can install debian packages from `deb.oxen.io` by adding the apt repo to your system.
+You can install debian packages from `deb.sispop.io` by adding the apt repo to your system.
 
-    $ sudo curl -so /etc/apt/trusted.gpg.d/oxen.gpg https://deb.oxen.io/pub.gpg
-    $ echo "deb https://deb.oxen.io $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/oxen.list
+    $ sudo curl -so /etc/apt/trusted.gpg.d/sispop.gpg https://deb.sispop.io/pub.gpg
+    $ echo "deb https://deb.sispop.io $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sispop.list
     
 This apt repo is also available via lokinet at `http://deb.loki`
 
@@ -48,11 +48,11 @@ When running from debian package the following steps are not needed as it is alr
 
 #### RPM <span id="rpm-install" />
 
-We also provide an RPM repo, see `rpm.oxen.io`, also available on lokinet at `rpm.loki`
+We also provide an RPM repo, see `rpm.sispop.io`, also available on lokinet at `rpm.loki`
     
 ## Bleeding Edge dev builds <span id="ci-builds" />
 
-automated builds from dev branches for the brave or impatient can be found from our CI pipeline [here](https://oxen.rocks/oxen-io/lokinet/). (warning: these nightly builds may or may not consume your first born child.)
+automated builds from dev branches for the brave or impatient can be found from our CI pipeline [here](https://sispop.rocks/sispop-io/lokinet/). (warning: these nightly builds may or may not consume your first born child.)
 
 ## Building
 
@@ -74,7 +74,7 @@ Build requirements:
 If you want to build from source: <span id="linux-compile" />
 
     $ sudo apt install build-essential cmake git libcap-dev pkg-config automake libtool libuv1-dev libsodium-dev libzmq3-dev libcurl4-openssl-dev libevent-dev nettle-dev libunbound-dev libssl-dev nlohmann-json3-dev
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -98,7 +98,7 @@ This requires the binary to have the proper capabilities which is usually set by
 
 #### Arch Linux <span id="mom-cancel-my-meetings-arch-linux-broke-again" />
 
-Due to [circumstances beyond our control](https://github.com/oxen-io/lokinet/discussions/1823) a working `PKGBUILD` can be found [here](https://raw.githubusercontent.com/oxen-io/lokinet/makepkg/contrib/archlinux/PKGBUILD).
+Due to [circumstances beyond our control](https://github.com/sispop-io/lokinet/discussions/1823) a working `PKGBUILD` can be found [here](https://raw.githubusercontent.com/sispop-io/lokinet/makepkg/contrib/archlinux/PKGBUILD).
 
 #### Cross Compile For Linux <span id="linux-cross" />
 
@@ -137,7 +137,7 @@ setup:
 
 building:
 
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ ./contrib/windows.sh
     
@@ -154,7 +154,7 @@ Currently has no VPN Platform code, see issue `#1513`
 build:
 
     $ pkg install cmake git pkgconf
-    $ git clone --recursive https://github.com/oxen-io/lokinet
+    $ git clone --recursive https://github.com/sispop-io/lokinet
     $ cd lokinet
     $ mkdir build
     $ cd build
@@ -169,6 +169,6 @@ install (root):
 
 We have an Android APK for lokinet VPN via android VPN API. 
 
-Coming to F-Droid whenever that happens. [[issue]](https://github.com/oxen-io/lokinet-flutter-app/issues/8)
+Coming to F-Droid whenever that happens. [[issue]](https://github.com/sispop-io/lokinet-flutter-app/issues/8)
 
-* [source code](https://github.com/oxen-io/lokinet-flutter-app)
+* [source code](https://github.com/sispop-io/lokinet-flutter-app)

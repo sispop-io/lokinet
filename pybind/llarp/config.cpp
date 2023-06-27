@@ -89,7 +89,7 @@ namespace llarp
         .def_property(
             "lokidRPCAddr",
             [](LokidConfig& self) { return self.lokidRPCAddr.full_address().c_str(); },
-            [](LokidConfig& self, std::string arg) { self.lokidRPCAddr = oxenmq::address(arg); });
+            [](LokidConfig& self, std::string arg) { self.lokidRPCAddr = sispopmq::address(arg); });
 
     py::class_<BootstrapConfig>(mod, "BootstrapConfig")
         .def(py::init<>())

@@ -6,33 +6,33 @@
 #include <llarp/router/abstractrouter.hpp>
 
 #include <nlohmann/json.hpp>
-#include <oxenc/bt.h>
-#include <oxenc/hex.h>
+#include <sispopc/bt.h>
+#include <sispopc/hex.h>
 #include <llarp/util/time.hpp>
 
 namespace llarp
 {
   namespace rpc
   {
-    static constexpr oxenmq::LogLevel
+    static constexpr sispopmq::LogLevel
     toLokiMQLogLevel(log::Level level)
     {
       switch (level)
       {
         case log::Level::critical:
-          return oxenmq::LogLevel::fatal;
+          return sispopmq::LogLevel::fatal;
         case log::Level::err:
-          return oxenmq::LogLevel::error;
+          return sispopmq::LogLevel::error;
         case log::Level::warn:
-          return oxenmq::LogLevel::warn;
+          return sispopmq::LogLevel::warn;
         case log::Level::info:
-          return oxenmq::LogLevel::info;
+          return sispopmq::LogLevel::info;
         case log::Level::debug:
-          return oxenmq::LogLevel::debug;
+          return sispopmq::LogLevel::debug;
         case log::Level::trace:
         case log::Level::off:
         default:
-          return oxenmq::LogLevel::trace;
+          return sispopmq::LogLevel::trace;
       }
     }
 
@@ -42,18 +42,18 @@ namespace llarp
       // m_lokiMQ->log_level(toLokiMQLogLevel(LogLevel::Instance().curLevel));
 
       // new block handler
-      m_lokiMQ->add_category("notify", oxenmq::Access{oxenmq::AuthLevel::none})
-          .add_command("block", [this](oxenmq::Message& m) { HandleNewBlock(m); });
+      m_lokiMQ->add_category("notify", sispopmq::Access{sispopmq::AuthLevel::none})
+          .add_command("block", [this](sispopmq::Message& m) { HandleNewBlock(m); });
 
       // TODO: proper auth here
-      auto lokidCategory = m_lokiMQ->add_category("lokid", oxenmq::Access{oxenmq::AuthLevel::none});
+      auto lokidCategory = m_lokiMQ->add_category("lokid", sispopmq::Access{sispopmq::AuthLevel::none});
       lokidCategory.add_request_command(
-          "get_peer_stats", [this](oxenmq::Message& m) { HandleGetPeerStats(m); });
+          "get_peer_stats", [this](sispopmq::Message& m) { HandleGetPeerStats(m); });
       m_UpdatingList = false;
     }
 
     void
-    LokidRpcClient::ConnectAsync(oxenmq::address url)
+    LokidRpcClient::ConnectAsync(sispopmq::address url)
     {
       if (auto router = m_Router.lock())
       {
@@ -64,8 +64,8 @@ namespace llarp
         LogInfo("connecting to lokid via LMQ at ", url.full_address());
         m_Connection = m_lokiMQ->connect_remote(
             url,
-            [self = shared_from_this()](oxenmq::ConnectionID) { self->Connected(); },
-            [self = shared_from_this(), url](oxenmq::ConnectionID, std::string_view f) {
+            [self = shared_from_this()](sispopmq::ConnectionID) { self->Connected(); },
+            [self = shared_from_this(), url](sispopmq::ConnectionID, std::string_view f) {
               llarp::LogWarn("Failed to connect to lokid: ", f);
               if (auto router = self->m_Router.lock())
               {
@@ -83,7 +83,7 @@ namespace llarp
     }
 
     void
-    LokidRpcClient::HandleNewBlock(oxenmq::Message& msg)
+    LokidRpcClient::HandleNewBlock(sispopmq::Message& msg)
     {
       if (msg.data.size() != 2)
       {
@@ -134,7 +134,7 @@ namespace llarp
             if (not success)
               LogWarn("failed to update service node list");
             else if (data.size() < 2)
-              LogWarn("oxend gave empty reply for service node list");
+              LogWarn("sispopd gave empty reply for service node list");
             else
             {
               try
@@ -181,10 +181,10 @@ namespace llarp
         pk = r->pubkey();
 
         nlohmann::json payload = {
-            {"pubkey_ed25519", oxenc::to_hex(pk.begin(), pk.end())},
+            {"pubkey_ed25519", sispopc::to_hex(pk.begin(), pk.end())},
             {"version", {VERSION[0], VERSION[1], VERSION[2]}}};
 
-        if (auto err = r->OxendErrorState())
+        if (auto err = r->SispopdErrorState())
           payload["error"] = *err;
 
         self->Request(
@@ -205,7 +205,7 @@ namespace llarp
           LogDebug("subscribed to new blocks: ", data[0]);
         });
         // Trigger an update on a regular timer as well in case we missed a block notify for some
-        // reason (e.g. oxend restarts and loses the subscription); we poll using the last known
+        // reason (e.g. sispopd restarts and loses the subscription); we poll using the last known
         // hash so that the poll is very cheap (basically empty) if the block hasn't advanced.
         self->UpdateServiceNodeList();
       };
@@ -292,7 +292,7 @@ namespace llarp
                 [self = shared_from_this()](bool success, std::vector<std::string>) {
                   if (not success)
                   {
-                    LogError("Failed to report connection status to oxend");
+                    LogError("Failed to report connection status to sispopd");
                     return;
                   }
                   LogDebug("reported connection status to core");
@@ -364,8 +364,8 @@ namespace llarp
               {
                 service::EncryptedName result;
                 const auto j = nlohmann::json::parse(data[1]);
-                result.ciphertext = oxenc::from_hex(j["encrypted_value"].get<std::string>());
-                const auto nonce = oxenc::from_hex(j["nonce"].get<std::string>());
+                result.ciphertext = sispopc::from_hex(j["encrypted_value"].get<std::string>());
+                const auto nonce = sispopc::from_hex(j["nonce"].get<std::string>());
                 if (nonce.size() != result.nonce.size())
                 {
                   throw std::invalid_argument{fmt::format(
@@ -390,7 +390,7 @@ namespace llarp
     }
 
     void
-    LokidRpcClient::HandleGetPeerStats(oxenmq::Message& msg)
+    LokidRpcClient::HandleGetPeerStats(sispopmq::Message& msg)
     {
       LogInfo("Got request for peer stats (size: ", msg.data.size(), ")");
       for (auto str : msg.data)
@@ -422,7 +422,7 @@ namespace llarp
           }
 
           std::vector<std::string> routerIdStrings;
-          oxenc::bt_deserialize(msg.data[0], routerIdStrings);
+          sispopc::bt_deserialize(msg.data[0], routerIdStrings);
 
           std::vector<RouterID> routerIds;
           routerIds.reserve(routerIdStrings.size());

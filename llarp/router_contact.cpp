@@ -9,7 +9,7 @@
 #include "util/mem.hpp"
 #include "util/time.hpp"
 
-#include <oxenc/bt_serialize.h>
+#include <sispopc/bt_serialize.h>
 
 #include "util/file.hpp"
 
@@ -276,7 +276,7 @@ namespace llarp
     try
     {
       std::string_view buf_view(reinterpret_cast<char*>(buf->cur), buf->size_left());
-      oxenc::bt_list_consumer btlist(buf_view);
+      sispopc::bt_list_consumer btlist(buf_view);
 
       uint64_t outer_version = btlist.consume_integer<uint64_t>();
 
@@ -310,7 +310,7 @@ namespace llarp
   }
 
   bool
-  RouterContact::DecodeVersion_1(oxenc::bt_list_consumer& btlist)
+  RouterContact::DecodeVersion_1(sispopc::bt_list_consumer& btlist)
   {
     auto signature_string = btlist.consume_string_view();
     signed_bt_dict = btlist.consume_dict_data();

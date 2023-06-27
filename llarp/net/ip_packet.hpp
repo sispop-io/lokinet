@@ -1,6 +1,6 @@
 #pragma once
 
-#include <oxenc/endian.h>
+#include <sispopc/endian.h>
 #include <llarp/ev/ev.hpp>
 #include "net.hpp"
 #include <llarp/util/buffer.hpp>
@@ -41,7 +41,7 @@ namespace llarp::net
     uint32_t daddr;
   };
 
-  using ip_header = std::conditional_t<oxenc::little_endian, ip_header_le, ip_header_be>;
+  using ip_header = std::conditional_t<sispopc::little_endian, ip_header_le, ip_header_be>;
 
   static_assert(sizeof(ip_header) == 20);
 
@@ -60,7 +60,7 @@ namespace llarp::net
   };
 
   using ipv6_header_preamble =
-      std::conditional_t<oxenc::little_endian, ipv6_header_preamble_le, ipv6_header_preamble_be>;
+      std::conditional_t<sispopc::little_endian, ipv6_header_preamble_le, ipv6_header_preamble_be>;
 
   static_assert(sizeof(ipv6_header_preamble) == 4);
 

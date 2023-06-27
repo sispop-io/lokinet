@@ -45,7 +45,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include <oxenmq/address.h>
+#include <sispopmq/address.h>
 
 namespace llarp
 {
@@ -232,7 +232,7 @@ namespace llarp
     llarp_dht_context* _dht = nullptr;
     std::shared_ptr<NodeDB> _nodedb;
     llarp_time_t _startedAt;
-    const oxenmq::TaggedThreadID m_DiskThread;
+    const sispopmq::TaggedThreadID m_DiskThread;
 
     llarp_time_t
     Uptime() const override;
@@ -298,16 +298,16 @@ namespace llarp
     void
     PumpLL();
 
-    const oxenmq::address DefaultRPCBindAddr = oxenmq::address::tcp("127.0.0.1", 1190);
+    const sispopmq::address DefaultRPCBindAddr = sispopmq::address::tcp("127.0.0.1", 1190);
     bool enableRPCServer = false;
-    oxenmq::address rpcBindAddr = DefaultRPCBindAddr;
+    sispopmq::address rpcBindAddr = DefaultRPCBindAddr;
     std::unique_ptr<rpc::RpcServer> m_RPCServer;
 
     const llarp_time_t _randomStartDelay;
 
     std::shared_ptr<rpc::LokidRpcClient> m_lokidRpcClient;
 
-    oxenmq::address lokidRPCAddr;
+    sispopmq::address lokidRPCAddr;
     Profiling _routerProfiling;
     fs::path _profilesFile;
     OutboundMessageHandler _outboundMessageHandler;
@@ -392,7 +392,7 @@ namespace llarp
     IsServiceNode() const override;
 
     std::optional<std::string>
-    OxendErrorState() const override;
+    SispopdErrorState() const override;
 
     void
     Close();
@@ -565,7 +565,7 @@ namespace llarp
 
     bool m_isServiceNode = false;
 
-    // Delay warning about being decommed/dereged until we've had enough time to sync up with oxend
+    // Delay warning about being decommed/dereged until we've had enough time to sync up with sispopd
     static constexpr auto DECOMM_WARNING_STARTUP_DELAY = 15s;
 
     llarp_time_t m_LastStatsReport = 0s;

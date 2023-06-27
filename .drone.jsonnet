@@ -13,7 +13,7 @@ local default_deps_base = [
 ];
 local default_deps_nocxx = ['libsodium-dev'] + default_deps_base;  // libsodium-dev needs to be >= 1.0.18
 local default_deps = ['g++'] + default_deps_nocxx;
-local docker_base = 'registry.oxen.rocks/lokinet-ci-';
+local docker_base = 'registry.sispop.rocks/lokinet-ci-';
 
 local submodule_commands = [
   'git fetch --tags',
@@ -26,7 +26,7 @@ local submodules = {
 };
 
 // cmake options for static deps mirror
-local ci_dep_mirror(want_mirror) = (if want_mirror then ' -DLOCAL_MIRROR=https://oxen.rocks/deps ' else '');
+local ci_dep_mirror(want_mirror) = (if want_mirror then ' -DLOCAL_MIRROR=https://sispop.rocks/deps ' else '');
 
 local apt_get_quiet = 'apt-get -o=Dpkg::Use-Pty=0 -q';
 
@@ -43,7 +43,7 @@ local debian_pipeline(name,
                       extra_cmds=[],
                       jobs=6,
                       tests=true,
-                      oxen_repo=false,
+                      sispop_repo=false,
                       allow_fail=false) = {
   kind: 'pipeline',
   type: 'docker',
@@ -64,10 +64,10 @@ local debian_pipeline(name,
                   apt_get_quiet + ' update',
                   apt_get_quiet + ' install -y eatmydata',
                 ] + (
-                  if oxen_repo then [
+                  if sispop_repo then [
                     'eatmydata ' + apt_get_quiet + ' install --no-install-recommends -y lsb-release',
-                    'cp contrib/deb.oxen.io.gpg /etc/apt/trusted.gpg.d',
-                    'echo deb http://deb.oxen.io $$(lsb_release -sc) main >/etc/apt/sources.list.d/oxen.list',
+                    'cp contrib/deb.sispop.io.gpg /etc/apt/trusted.gpg.d',
+                    'echo deb http://deb.sispop.io $$(lsb_release -sc) main >/etc/apt/sources.list.d/sispop.list',
                     'eatmydata ' + apt_get_quiet + ' update',
                   ] else []
                 ) + [
@@ -106,7 +106,7 @@ local apk_builder(name, image, extra_cmds=[], allow_fail=false, jobs=6) = {
       environment: { SSH_KEY: { from_secret: 'SSH_KEY' }, ANDROID: 'android' },
       commands: [
         'VERBOSE=1 JOBS=' + jobs + ' NDK=/usr/lib/android-ndk ./contrib/android.sh',
-        'git clone https://github.com/oxen-io/lokinet-flutter-app lokinet-mobile',
+        'git clone https://github.com/sispop-io/lokinet-flutter-app lokinet-mobile',
         'cp -av build-android/out/* lokinet-mobile/lokinet_lib/android/src/main/jniLibs/',
         'cd lokinet-mobile',
         'flutter build apk --debug',
@@ -206,7 +206,7 @@ local linux_cross_pipeline(name,
 };
 
 // Builds a snapshot .deb on a debian-like system by merging into the debian/* or ubuntu/* branch
-local deb_builder(image, distro, distro_branch, arch='amd64', oxen_repo=true) = {
+local deb_builder(image, distro, distro_branch, arch='amd64', sispop_repo=true) = {
   kind: 'pipeline',
   type: 'docker',
   name: 'DEB (' + distro + (if arch == 'amd64' then '' else '/' + arch) + ')',
@@ -223,9 +223,9 @@ local deb_builder(image, distro, distro_branch, arch='amd64', oxen_repo=true) = 
       commands: [
         'echo "Building on ${DRONE_STAGE_MACHINE}"',
         'echo "man-db man-db/auto-update boolean false" | debconf-set-selections',
-      ] + (if oxen_repo then [
-             'cp contrib/deb.oxen.io.gpg /etc/apt/trusted.gpg.d',
-             'echo deb http://deb.oxen.io $${distro} main >/etc/apt/sources.list.d/oxen.list',
+      ] + (if sispop_repo then [
+             'cp contrib/deb.sispop.io.gpg /etc/apt/trusted.gpg.d',
+             'echo deb http://deb.sispop.io $${distro} main >/etc/apt/sources.list.d/sispop.list',
            ] else []) + [
         apt_get_quiet + ' update',
         apt_get_quiet + ' install -y eatmydata',
@@ -233,7 +233,7 @@ local deb_builder(image, distro, distro_branch, arch='amd64', oxen_repo=true) = 
         |||
           # Look for the debian branch in this repo first, try upstream if that fails.
           if ! git checkout $${distro_branch}; then
-              git remote add --fetch upstream https://github.com/oxen-io/lokinet.git &&
+              git remote add --fetch upstream https://github.com/sispop-io/lokinet.git &&
               git checkout $${distro_branch}
           fi
         |||,
@@ -376,7 +376,7 @@ local docs_pipeline(name, image, extra_cmds=[], allow_fail=false) = {
                   docker_base + 'ubuntu-bionic',
                   deps=['g++-8'] + default_deps_nocxx,
                   cmake_extra='-DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8',
-                  oxen_repo=true),
+                  sispop_repo=true),
 
   // ARM builds (ARM64 and armhf)
   debian_pipeline('Debian sid (ARM64)', docker_base + 'debian-sid', arch='arm64', jobs=4),
@@ -404,7 +404,7 @@ local docs_pipeline(name, image, extra_cmds=[], allow_fail=false) = {
                   deps=['g++-8', 'python3-dev', 'automake', 'libtool'],
                   lto=true,
                   tests=false,
-                  oxen_repo=true,
+                  sispop_repo=true,
                   cmake_extra='-DBUILD_STATIC_DEPS=ON -DBUILD_SHARED_LIBS=OFF -DSTATIC_LINK=ON ' +
                               '-DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 ' +
                               '-DCMAKE_CXX_FLAGS="-march=x86-64 -mtune=haswell" ' +

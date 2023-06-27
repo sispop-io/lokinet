@@ -8,7 +8,7 @@
 #include <utility>
 #include <unordered_set>
 #include <llarp/router/abstractrouter.hpp>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 static constexpr auto LINK_LAYER_TICK_INTERVAL = 100ms;
 

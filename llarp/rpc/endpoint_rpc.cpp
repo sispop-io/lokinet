@@ -24,12 +24,12 @@ namespace llarp::rpc
     if (m_AuthURL.empty() or m_AuthMethod.empty())
       return;
     m_LMQ->connect_remote(
-        oxenmq::address{m_AuthURL},
-        [self = shared_from_this()](oxenmq::ConnectionID c) {
+        sispopmq::address{m_AuthURL},
+        [self = shared_from_this()](sispopmq::ConnectionID c) {
           self->m_Conn = std::move(c);
           LogInfo("connected to endpoint auth server");
         },
-        [self = shared_from_this()](oxenmq::ConnectionID, std::string_view fail) {
+        [self = shared_from_this()](sispopmq::ConnectionID, std::string_view fail) {
           LogWarn("failed to connect to endpoint auth server: ", fail);
           self->m_Endpoint->Loop()->call_later(1s, [self] { self->Start(); });
         });

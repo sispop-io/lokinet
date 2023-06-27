@@ -18,7 +18,7 @@
 #include <vector>
 
 #include <llarp/util/formattable.hpp>
-#include <oxenc/variant.h>
+#include <sispopc/variant.h>
 
 #include "uint128.hpp"
 

@@ -39,7 +39,7 @@
 
 #include <llarp/constants/platform.hpp>
 
-#include <oxenmq/oxenmq.h>
+#include <sispopmq/sispopmq.h>
 
 static constexpr std::chrono::milliseconds ROUTER_TICK_INTERVAL = 250ms;
 
@@ -49,7 +49,7 @@ namespace llarp
 
   Router::Router(EventLoop_ptr loop, std::shared_ptr<vpn::Platform> vpnPlatform)
       : ready{false}
-      , m_lmq{std::make_shared<oxenmq::OxenMQ>()}
+      , m_lmq{std::make_shared<sispopmq::SispopMQ>()}
       , _loop{std::move(loop)}
       , _vpnPlatform{std::move(vpnPlatform)}
       , paths{this}
@@ -426,12 +426,12 @@ namespace llarp
     whitelistRouters = conf.lokid.whitelistRouters;
     if (whitelistRouters)
     {
-      lokidRPCAddr = oxenmq::address(conf.lokid.lokidRPCAddr);
+      lokidRPCAddr = sispopmq::address(conf.lokid.lokidRPCAddr);
       m_lokidRpcClient = std::make_shared<rpc::LokidRpcClient>(m_lmq, weak_from_this());
     }
 
     if (enableRPCServer)
-      rpcBindAddr = oxenmq::address(conf.api.m_rpcBindAddr);
+      rpcBindAddr = sispopmq::address(conf.api.m_rpcBindAddr);
 
     log::debug(logcat, "Starting RPC server");
     if (not StartRpcServer())
@@ -506,7 +506,7 @@ namespace llarp
   }
 
   std::optional<std::string>
-  Router::OxendErrorState() const
+  Router::SispopdErrorState() const
   {
     // If we're in the white or gray list then we *should* be establishing connections to other
     // routers, so if we have almost no peers then something is almost certainly wrong.
@@ -1501,7 +1501,7 @@ namespace llarp
   {
     llarp::sys::service_manager->stopping();
     Close();
-    log::debug(logcat, "stopping oxenmq");
+    log::debug(logcat, "stopping sispopmq");
     m_lmq.reset();
   }
 

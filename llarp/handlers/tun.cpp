@@ -29,7 +29,7 @@
 #include <llarp/constants/net.hpp>
 #include <llarp/constants/platform.hpp>
 
-#include <oxenc/bt.h>
+#include <sispopc/bt.h>
 
 namespace llarp
 {
@@ -395,7 +395,7 @@ namespace llarp
           {
             std::string_view bdata{data.data(), data.size()};
             LogDebug(Name(), " parsing address map data: ", bdata);
-            const auto parsed = oxenc::bt_deserialize<oxenc::bt_dict>(bdata);
+            const auto parsed = sispopc::bt_deserialize<sispopc::bt_dict>(bdata);
             for (const auto& [key, value] : parsed)
             {
               huint128_t ip{};
@@ -1116,7 +1116,7 @@ namespace llarp
                 addrmap[ip.ToString()] = a.ToString();
             }
           }
-          const auto data = oxenc::bt_serialize(addrmap);
+          const auto data = sispopc::bt_serialize(addrmap);
           maybe->write(data.data(), data.size());
         }
       }

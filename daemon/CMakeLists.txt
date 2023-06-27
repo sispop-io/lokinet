@@ -49,7 +49,7 @@ endif()
 # cmake interface library for bunch of cmake hacks to fix final link order
 add_library(hax_and_shims_for_cmake INTERFACE)
 if(WIN32)
-  target_link_libraries(hax_and_shims_for_cmake INTERFACE uvw oxenmq::oxenmq -lws2_32 -lshlwapi -ldbghelp -luser32 -liphlpapi -lpsapi -luserenv)
+  target_link_libraries(hax_and_shims_for_cmake INTERFACE uvw sispopmq::sispopmq -lws2_32 -lshlwapi -ldbghelp -luser32 -liphlpapi -lpsapi -luserenv)
 endif()
 
 foreach(exe ${exetargets})
