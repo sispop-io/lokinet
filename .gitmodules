@@ -36,3 +36,6 @@
 [submodule "external/sispop-encoding"]
 	path = external/sispop-encoding
 	url = https://github.com/syssiproject/sispop-encoding
+[submodule "external/sispop-mq"]
+	path = external/sispop-mq
+	url = https://github.com/sispop-io/sispop-mq
