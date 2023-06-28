@@ -30,9 +30,6 @@
 [submodule "gui"]
 	path = gui
 	url = https://github.com/sispop-io/lokinet-gui.git
-[submodule "external/sispop-mq"]
-	path = external/sispop-mq
-	url = https://github.com/syssiproject/sispop-mq.git
 [submodule "external/sispop-logging"]
 	path = external/sispop-logging
 	url = https://github.com/syssiproject/sispop-logging.git
