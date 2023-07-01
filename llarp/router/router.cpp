@@ -501,7 +501,7 @@ namespace llarp
   bool
   Router::TooFewPeers() const
   {
-    constexpr int KnownPeerWarningThreshold = 5;
+    constexpr int KnownPeerWarningThreshold = 3;
     return nodedb()->NumLoaded() < KnownPeerWarningThreshold;
   }
 

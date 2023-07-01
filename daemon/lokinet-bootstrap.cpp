@@ -55,8 +55,8 @@ int
 main(int argc, char* argv[])
 {
   const std::unordered_map<std::string, std::string> bootstrap_urls = {
-      {"mainnet", "https://seed.lokinet.org/lokinet.signed"},
-      {"lokinet", "https://seed.lokinet.org/lokinet.signed"},
+      {"mainnet", "https://seednet.sispop.site/lokinet.signed"},
+      {"lokinet", "https://lokinet.sispop.site/lokinet.signed"},
       {"testnet", "https://seed.lokinet.org/testnet.signed"},
       {"gamma", "https://seed.lokinet.org/testnet.signed"}};
 
